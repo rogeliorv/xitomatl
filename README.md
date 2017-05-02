@@ -4,16 +4,16 @@ Xitomatl is the codename for my personal productivity tool.
 Main features include:
 
 1) Boards to organize your tasks. (In a similar fashion to Trello)
-2) Priorization, deadlines and scheduling for every task.
-3) Time tracking for every tasks using the Pomodoro technique (https://en.wikipedia.org/wiki/Pomodoro_Technique)
+2) prioritization, deadlines and scheduling for every task.
+3) Time tracking for every task using the Pomodoro technique (https://en.wikipedia.org/wiki/Pomodoro_Technique)
 4) Daily planning (Get the pending items for the day)
 5) Task labeling. (Useful to know in what type of tasks you spend your time on)
-6) Historic data. See what you worked on in a given time frame
-7) Dashboards. See what type of tasks you have used your time on
+6) Historic data. See what you worked on in a given time frame.
+7) Dashboards. See what type of tasks you have invested your time on.
 
 Future plans:
 
-1) Integration with chatbots to let you know your agenda for the day and week.
+1) Integration with facebook and telegram chatbots to let you know your agenda for the day and week.
 2) Adding, tracking and organizing tasks through the chatbot
 3) Get your daily agenda using the chatbot
 
@@ -29,12 +29,16 @@ You will need the following things properly installed on your computer.
 
 ## Installation
 
-* `git clone <repository-url>` this repository
+* `git clone https://github.com/rogeliorv/xitomatl.git` this repository
 * `cd xitomatl`
 * `npm install`
 * `bower install`
 
 ## Firebase
+
+Follow the instruction to setup firebase at https://firebase.google.com/docs/cli/
+
+npm install -g firebase-tools
 
 Set the firebase configuration in config/environment.js
 
@@ -72,12 +76,8 @@ Make use of the many generators for code, try `ember help generate` for more det
 
 ### Deploying
 
-Specify what it takes to deploy your app.
+Setup your firebase cli and login to your project. (https://firebase.google.com/docs/cli/)
 
-## Further Reading / Useful Links
+Run the firebase deploy command: 
 
-* [ember.js](http://emberjs.com/)
-* [ember-cli](https://ember-cli.com/)
-* Development Browser Extensions
-  * [ember inspector for chrome](https://chrome.google.com/webstore/detail/ember-inspector/bmdblncegkenkacieihfhpjfppoconhi)
-  * [ember inspector for firefox](https://addons.mozilla.org/en-US/firefox/addon/ember-inspector/)
+firebase deploy --only hosting
