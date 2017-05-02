@@ -1,0 +1,15 @@
+{{!-- {{ xitomatl-task-card taskCard=model.selectedTaskCard addTaskToCard=(route-action "addTaskToCard") deleteTask=(route-action "deleteTask") deleteCard=(route-action "deleteCard")}} --}}
+{{!-- {{#if model.selectedTaskCard }}
+    {{ xitomatl-task-card taskCard=model.selectedTaskCard showDetails=true addTaskToCard=(route-action "addTaskToCard") deleteTask=(route-action "deleteTask") deleteCard=(route-action "deleteCard")}}
+{{/if}} --}}
+<div class="mdl-grid taskCardGrid">
+    {{#each model as |taskCard|}}
+        <div class="xitomatl-card-container">
+            {{ xitomatl-task-card taskCard=taskCard addTaskToCard=(route-action "addTaskToCard") deleteTask=(route-action "deleteTask") deleteTaskCard=(route-action "deleteTaskCard") updateTaskCard=(route-action "updateTaskCard")}}
+        </div>
+    {{/each}}
+    <div class="xitomatl-card-container">
+        {{ xitomatl-task-card taskCard=null createTaskCard=(route-action "createTaskCard")}}
+    </div>
+</div>
+{{outlet}}

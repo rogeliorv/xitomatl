@@ -1,9 +1,0 @@
-.xitomatl-card.mdl-card {
-  width: 320px;
-  min-height: 300px;
-}
-.xitomatl-card > .mdl-card__title {
-  color: #fff;
-  background:
-    url('https://getmdl.io/assets/demos/dog.png') bottom right 15% no-repeat rgb(83,109,254);
-}

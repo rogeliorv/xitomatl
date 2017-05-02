@@ -1,40 +1,173 @@
-<div class="xitomatl-card mdl-card mdl-shadow--4dp">
-  
-  {{!--
-  TODO: Add a customizable image to the card
-  TODO: Add a customizable background to the card
-  TODO: Add a customizable background color to the container-fluid
-   --}}
-
-   <div class="mdl-card__title mdl-card--expand">
-     <h2 class="mdl-card__title-text">Semana 1 Febrero</h2>
-   </div>
-    
-  <div class="mdl-card__supporting-text">
-    Pasear a chowie
-  </div>
-  <div class="mdl-card__supporting-text">
-    Hacer codigo
-  </div>
-  <div class="mdl-card__supporting-text">
-    Cocinar
-  </div>
-  <div class="mdl-card__supporting-text">
-    No acabarme la comida
-  </div>
-  
-  {{!-- TODO: Align to the right --}}
-    <div class="mdl-card__actions mdl-card--border">
-      <button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored">
-        <i class="material-icons">add</i>
-      </button>
-      <button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored">
-        <i class="material-icons">remove</i>
-      </button>
-      <button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored">
-        <i class="material-icons">alarm-add</i>
-      </button>
-
+{{!-- Just a normal card with tasks in it --}}
+{{# if taskCard }}
+    <div class="mdl-card__title">
+        {{#if showDetails }}
+            <div class="mdl-card__menu left">
+                <button class="mdl-button mdl-js-button mdl-button--icon"><i class="material-icons md-36"> {{#link-to "task-cards"}}chevron_left{{/link-to}}</i></button>
+            </div>
+        {{else}}
+            <div class="mdl-card__menu">
+                <button class="mdl-button mdl-js-button mdl-button--icon"><i class="material-icons md-36">{{#link-to "task-cards.detail" taskCard.id}}chevron_right{{/link-to}}</i></button>
+            </div>
+        {{/if}}
+        {{textarea class=(concat "mdl-textfield__input mdl-card__title-text " (if showDetails "left" "")) type="text" focus-in="focusTaskCardTitle" focus-out="blurTaskCardTitle" value=shortTitle enter="updateTaskCardTitle" }}
     </div>
-</div>
+
+    {{# if taskCard.id }}
+        <div class="cardContent">
+            {{!-- Only show the search bar if there are tasks in the card --}}
+            {{#if taskCard.tasks.length }}
+                <form {{action "searchTasks" on="submit"}} class="inputBar">
+                    <div class="mdl-textfield mdl-js-textfield">
+                        <button class="mdl-button mdl-js-button mdl-button--icon" {{action "focusBar" (concat "taskSearchBar-" taskCard.id)}}>
+                            <i class="material-icons">search</i>
+                        </button>
+                        {{input class="mdl-textfield__input" type="text" id=(concat "taskSearchBar-" taskCard.id) key-up="searchTasks" value=taskSearchFilter}}
+                        <label class="mdl-textfield__label" for="{{concat "taskSearchBar-" taskCard.id}}">Buscar tarea...</label>
+                        <button class="mdl-button mdl-js-button mdl-button--icon clear" {{action "clearBar" (concat "taskSearchBar-" taskCard.id)}}>
+                            <i class="material-icons">clear</i>
+                        </button>
+                  </div>
+                </form>
+            {{/if}}
+
+            <!-- Grid consists of main edition area and actions on the right -->
+            {{# if showDetails }}
+                <div class="mdl-grid">
+                    <div class="mdl-cell mdl-cell--10-col mdl-cell--6-col-tablet mdl-cell--4-col-phone">
+                            <form {{action "taskCardFormSubmit" }} class="summaryForm">
+                                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label description">
+                                    <label class="mdl-textfield__label" for={{concat "taskCardDescription-" taskCard.id}}>Descripción de la lista</label>
+                                    {{textarea class="mdl-textfield__input" type="text" id=(concat "taskCardDescription-" taskCard.id) value=taskCard.description }}
+                                </div>
+                                {{#if summary }}
+                                    <div class="task-card-summary">
+                                        <div class="labeledData summary_block_md">
+                                            <label for={{concat "taskCardTotalTasks-" taskCard.id}}>Numero de tareas</label>
+                                            <p id={{concat "taskCardTotalTasks-" taskCard.id}}>{{taskCard.tasks.length}}</p>
+                                        </div>
+                                        
+                                        <div class="labeledData summary_block_md">
+                                            <label for={{concat "taskCardTotalCompleted-" taskCard.id}}>Completadas</label>
+                                            <p id={{concat "taskCardTotalCompleted-" taskCard.id}}>{{summary.completedTasks}}</p>
+                                        </div>
+                                        
+                                        <div class="labeledData summary_block">
+                                            <label for={{concat "taskCardTotalInProgress-" taskCard.id}}>En progreso</label>
+                                            <p id={{concat "taskCardTotalInProgress-" taskCard.id}}>{{summary.inProgressTasks}}</p>
+                                        </div>
+                                    </div>
+                                    <div class="task-card-summary">
+                                        <div class="labeledData summary_block_md">
+                                            <label for={{concat "taskCardDuration-" taskCard.id}}>Duración de las tareas</label>
+                                            <p id={{concat "taskCardDuration-" taskCard.id}}>{{pluralize-word summary.duration taskCard.friendlyTimeUnit}}</p>
+                                        </div>
+                                        <div class="labeledData summary_block_md">
+                                            <label for={{concat "taskCardTimeSpent-" taskCard.id}}>Tiempo invertido</label>
+                                            <p id={{concat "taskCardTimeSpent-" taskCard.id}}>{{pluralize-word summary.timeSpent taskCard.friendlyTimeUnit}}</p>
+                                        </div>
+                                        
+                                        <div class="labeledData summary_block">
+                                            <label for={{concat "taskCardProgress-" taskCard.id}}>Avance</label>
+                                            <p id={{concat "taskCardProgress-" taskCard.id}}>{{summary.progressPercentage}} %</p>
+                                        </div>
+                                    </div>
+                                {{/if}}
+                            </form>
+                    </div>
+                    
+                    <!-- Actions -->
+                    <div class="mdl-cell mdl-cell--2-col mdl-cell--1-col-phone task-card-actions">
+                        <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent"><i class="material-icons">account_circle</i><span class="action-icon-text"> Miembros</span></button>
+                        <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent"><i class="material-icons">attachment</i><span class="action-icon-text"> Archivos</span></button>
+                        <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent"><i class="material-icons">label</i><span class="action-icon-text"> Etiquetas</span></button>
+                        <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" {{action "deleteTaskCard" }}><i class="material-icons">delete</i><span class="action-icon-text"> Borrar</span></button>
+                    </div>
+                </div>
+            {{/if}}
+            {{!-- When the details are shown the add task area is shown before all tasks. If we are in the compact view, the add task area is shown after
+            we change the classes and the css uses flex and order properties to achieve this --}}
+            {{!-- Add a new task is shown at the beginning of the task list when details are shown --}}
+            <form {{action "newTaskFormSubmit" on="submit"}} class="inputBar {{if showDetails "order-1" "order-2"}}">
+                <div class="mdl-textfield mdl-js-textfield">
+                    <button class="mdl-button mdl-js-button mdl-button--icon" {{ action "addTaskButtonAction" (concat "addTaskBar-" taskCard.id)}}>
+                        <i class="material-icons">add</i>
+                    </button>
+                    {{input class="mdl-textfield__input" id=(concat "addTaskBar-" taskCard.id) type="text" enter="createTask" value=newTaskContent}}
+                    <label class="mdl-textfield__label" for={{concat "addTaskBar-" taskCard.id}}>Agregar tarea</label>
+                    <button class="mdl-button mdl-js-button mdl-button--icon clear" {{action "clearBar" (concat "addTaskBar-" taskCard.id)}}>
+                        <i class="material-icons">clear</i>
+                    </button>
+              </div>
+            </form>
+            {{!-- When the details are shown the add task area is shown before all tasks. If we are in the compact view, the add task area is shown after
+            we change the classes and the css uses flex and order properties to achieve this --}}
+            {{#if taskCard.tasks.length }}
+                <ul class="mdl-list tasks {{if showDetails "order-2" "order-1"}}">
+                    {{#each shownElements as |task|}}
+                        <li class="mdl-list__item mdl-list__item--two-line">
+                            <div class="mdl-list__item-primary-content taskItem" >
+                                <div class="listItemTopSubtitleBlock {{task.progressClass}}">{{if task.completedDate " Completada" (concat task.progress "%")}}</div>
+                                <div class="mdl-list__item-title">{{#link-to "task" task.id}}{{ task.title }}{{/link-to}}</div>
+                                <div class="mdl-list__item-sub-title listItemSubtitle">
+                                    <div class="listItemSubtitleBlock grow">{{pluralize-word task.unitDuration task.friendlyTimeUnit}} </div>
+                                    <div class="listItemSubtitleBlock">{{human-date task.dueDate "Sin fecha"}}</div>
+                                    <div class="listItemSubtitleBlock priority-{{task.priorityClass}}">{{task.priority}}</div>
+                                </div>
+                            </div>
+                            <div class="mdl-list__item-secondary-content">
+                                <div class="card-task-actions">
+                                    <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--accent" {{action "deleteTask" task}}><i class="material-icons md-36">delete</i></button>
+                                    {{#link-to "task" task.id (query-params timer="on")}}
+                                        <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--accent"><i class="material-icons md-36">alarm</i></button>
+                                    {{/link-to}}
+                                </div>
+                            </div>
+                        </li>
+                    {{/each}}
+                    {{#if remainingElements }}
+                        <li class="mdl-list__item mdl-list__item--two-line">
+                            <div class="mdl-list__item-primary-content remainingElements">
+                                <div class="mdl-list__item-title task-card-details">
+                                    {{#link-to "task-cards.detail" taskCard.id}}Ver {{pluralize-word remainingElements "tarea"}} más...{{/link-to}}
+                                </div>
+                            </div>
+                            <div class="mdl-list__item-secondary-content">
+                                <div class="card-task-actions">
+                                    {{#link-to "task-cards.detail" taskCard.id }}
+                                        <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--accent"><i class="material-icons md-36">format_list_bulleted</i></button>
+                                    {{/link-to}}
+                                </div>
+                            </div>
+                        </li>
+                    {{/if}}
+                </ul>
+                {{#unless shownElements.length }}
+                    <div class="searchResults">
+                        <!--label for={{concat "taskCardTotalTasks-" taskCard.id}}>Numero de tareas</label-->
+                        <p>No se encontré tareas para: <span class="searchCriteria">{{taskSearchFilter}}</span></p>
+                    </div>
+                {{/unless}}
+            {{!-- Search did not happen because there are no tasks yet. --}}
+            {{ else }}
+                <div class="searchResults">
+                    <p>Aún no has agregado tareas a esta lista. ¡Agrega una!</p>
+                </div>
+            {{/if }}
+        </div>
+    {{/if}}
+{{!-- Only entering the else clause if taskCard is falsey. This means we should render and empty card. Used to add new cards. --}}
+{{ else }}
+            <button class="mdl-button mdl-button-md mdl-js-button mdl-button--fab mdl-button--colored addButton" {{ action "emptyCardAddAction" }}><i class="material-icons">add</i></button>
+            <form class="inputBar" {{action "emptyCardFormSubmit" on="submit"}}>
+                <div class="mdl-textfield mdl-js-textfield">
+                    <button class="mdl-button mdl-js-button mdl-button--icon" {{action "focusBar" "emptyTaskCardInput" }}><i class="material-icons">edit</i></button>
+                    {{input class="mdl-textfield__input" id="emptyTaskCardInput"type="text" enter="emptyCardAddAction" value=emptyTaskCardContent}}
+                    <label class="mdl-textfield__label" for="emptyTaskCardInput">Agregar nueva lista</label>
+                    <button class="mdl-button mdl-js-button mdl-button--icon clear" {{action "clearBar" "emptyTaskCardInput"}}>
+                        <i class="material-icons">clear</i>
+                    </button>
+              </div>
+            </form>
+{{/if }}
 {{yield}}

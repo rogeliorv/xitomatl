@@ -1,0 +1,734 @@
+$primary-card-title-color: #FFF;
+$primary-card-title-background-color: rgb(83,109,254);
+$input-background-color: $primary-card-title-background-color;
+$input-background-color-focus: rgb(93,119,255);
+$red: rgb(255,80,30);
+$orange: rgb(255,130,0);
+$green: rgb(76, 175, 80);
+$gray: rgb(158, 158, 158);
+$xitomatl-card-width: 320px;
+$xitomatl-card-width-details: 600px;
+$content-color: rgba(0, 0, 0, 0.7);
+$content-color-soft: rgba(0, 0, 0, 0.54);
+
+
+.material-icons.md-16 { font-size: 16px; }
+.material-icons.md-18 { font-size: 18px; }
+.material-icons.md-24 { font-size: 24px; }
+.material-icons.md-36 { font-size: 36px; }
+.material-icons.md-48 { font-size: 48px; }
+
+
+.red { color: $red; }
+.orange { color: $orange; }
+.green { color: $green; }
+.priority-none { color: $gray; }
+
+.floating-label {
+    color: rgb(96,125,139);
+}
+
+.mdl-card__menu {
+    color: $primary-card-title-color;
+    
+    a {
+        color: $primary-card-title-color;
+    }
+}
+
+.mdl-card__menu.left {
+    position: absolute;
+    left: 16px;
+    top: 16px;
+    max-width: 32px;
+}
+
+.mdl-card__title-text.left {
+    padding-left: 50px;
+}
+
+.mdl-card__title-text-subtitle {
+    font-size: 16px;
+    line-height: 16px;
+    margin: 0px;
+    margin-top: 5px;
+    color: #ddd;
+    padding-left: 16px;
+    
+    a {
+        color: #eef;
+        text-decoration: none;
+    }
+}
+
+.mdl-grid.taskCardGrid {
+    padding: 0px;
+    margin: auto;
+    width: 100%;
+    justify-content: center;
+    align-self: center;
+}
+
+
+.mdl-card__title {
+    color: $primary-card-title-color;
+    background-color: $primary-card-title-background-color;
+    max-height: 80px;
+
+    .mdl-card__title-text {
+        width: calc(100% - 60px);
+        font-size: 22px;
+        border-bottom: none;
+    }
+    
+    textarea {
+        resize: none;
+        cursor: pointer;
+    }
+    
+    textarea:focus {
+        font-size: 18px;
+        outline: none;
+        transition: font 0.1s ease;
+        background-color: $input-background-color-focus;
+    }
+}
+
+.mdl-textfield {
+    width: 100%;
+}
+
+.summaryForm {
+    color: $content-color;
+    font-size: 1rem;
+    overflow: hidden;
+    padding: 0px;
+    width: 100%;
+    
+    textarea {
+        cursor: pointer;
+    }
+    
+    textarea:focus {
+        font-size: 14px;
+        outline: none;
+        transition: font 0.1s ease;
+    }
+    
+    input {
+        cursor: pointer;
+        text-align: center;
+    }
+    
+    input:focus {
+        font-size: 14px;
+        outline: none;
+        transition: font 0.1s ease;
+    }
+    
+    .description {
+        width: 90%;
+            display: block;
+            textarea {
+                height: 3em;
+                width: 90%;
+            }
+    }
+    
+    .summary_block_bg {
+        .mdl-textfield {
+            max-width: 3.5em;
+        }
+    }
+    
+    .optionButton {
+        // display: inline-block;
+        padding-left: 0px;
+        padding-right: 0px;
+        text-transform: none;
+        color: $content-color-soft;
+        // position: relative;
+    }
+    
+    
+    .assignmentButton {
+        color: $content-color-soft;
+    }
+    
+    // .taskCardDescription
+    // .task-description
+}
+
+.task-card-summary {
+    display: flex;
+}
+
+
+.summary_block {
+    display: block;
+    width: 75px;
+}
+
+.summary_block_md {
+    display: block;
+    width: 140px;
+}
+
+.summary_block_bg {
+    display: block;
+    width: 200px;
+}
+
+.summary_input {
+    display: inline-block;
+    max-width: 6em;
+    // padding-left: 16px;
+}
+
+.labeledData {
+    
+    margin-left: auto;
+    margin-right: auto;
+    
+    label {
+        color: rgb(96,125,139);
+        font-size: 12px;
+        text-align: center;
+    }
+    
+    p {
+        font-size: 16px;
+        padding: 0px;
+        color: $content-color;
+        margin: 0px;
+    }
+    
+    p.center {
+        text-align: center;
+    }
+    
+    a {
+        text-decoration: none;
+    }
+}
+
+.order-1 {
+    order: 1;
+}
+
+.order-2 {
+    order: 2;
+}
+
+.cardContent {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    
+}
+
+
+.inputBar {
+    //max-height: 150px;
+    display: block;
+    color: rgba(0,0,0,.87);
+    justify-content: stretch;
+    line-height: normal;
+    box-sizing: border-box;
+    transform-origin: 165px 56px;
+    perspective-origin: 165px 56px;
+    
+    .mdl-textfield {
+        padding: 10px 0px;
+    }
+    
+    input {
+        padding-left: 45px;
+        padding-right: 45px;
+        box-sizing: border-box;
+    }
+    
+    textarea {
+        padding-left: 45px;
+        padding-right: 45px;
+        box-sizing: border-box;
+        resize: none;
+    }
+    
+    .mdl-textfield__label {
+        padding-left: 45px;
+        bottom: 0px;
+        top: 12px;
+    }
+    
+    .mdl-textfield__label:after {
+        bottom: 10px;
+    }
+    
+    .mdl-button {
+        color: rgba(0,0,0,.30);
+        left: 10px;
+        bottom: 10px;
+        
+    }
+    
+    .mdl-button.clear {
+        color: rgba(0,0,0,.30);
+        right: 10px;
+        float: right;
+        bottom: 10px;
+        left: auto;
+    }
+}
+
+.searchResults {
+    padding: 8px 16px;
+    color: $content-color;
+    p {
+        font-size: 16px;
+    }
+    
+    .searchCriteria {
+        font-style: italic;
+    }
+}
+
+.xitomatl-card-container {
+    
+    @media (max-width: 479px) {
+        margin: 16px 0px;
+    }
+    @media (min-width: 480px) {
+        margin: 16px;
+    }
+}
+
+/* Task Cards */
+.xitomatl-card.mdl-card {
+        
+    margin: auto;
+    
+    .listItemTopSubtitleBlock {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        align-items: baseline;
+        font-size: 10px;
+        line-height: 12px;
+    }
+    
+    .listItemSubtitle {
+        
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        align-items: baseline;
+        
+        .listItemSubtitleBlock {
+            display: flex;
+            font-size: 11px;
+            line-height: 12px;
+        }
+        
+        .listItemSubtitleBlock.grow {
+            flex-grow: 2px;
+            
+        }
+    }
+
+    
+    .priority-high {
+        color: $red;
+    }
+
+    .priority-medium {
+        color: $orange;
+    }
+
+    .priority-low {
+        color: $green;
+    }
+
+    .priority-none {
+        color: $gray;
+    }
+
+    width: $xitomatl-card-width;
+    min-height: 300px;
+     
+    .mdl-list__item .mdl-list__item-secondary-content .mdl-list__item-secondary-info {
+        font-size: 11px;
+    }
+    
+    .card-task-actions {
+        button {
+            padding: 0;
+            min-width: 36px;
+        }
+    }
+     
+    .mdl-list.tasks{
+        max-height: 500px;
+    }
+    
+    ul.mdl-list {
+        margin: 0px;
+        padding: 0px;
+     
+        li.mdl-list__item.mdl-list__item--two-line.input {
+            height: 48px;
+            padding-top: 0px;
+            vertical-align: center;
+        }
+        
+        .mdl-list__item-primary-content.taskItem {
+            
+            max-width: calc(100% - 100px);
+            
+            .mdl-list__item-title {
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                
+            }
+            
+            a {
+                text-decoration: none;
+                color: rgba(0,0,0,.87);
+            }
+        }
+        
+        .mdl-list__item-primary-content.remainingElements {
+            
+            max-width: calc(100% - 100px);
+            padding-top: 10px;
+        }
+    }
+}
+
+
+.xitomatl-card.mdl-card.details {
+    
+    
+    width: $xitomatl-card-width-details;
+    
+    
+    @media (max-width: $xitomatl-card-width-details) {
+        width: 100%;
+    }
+    
+    
+    .mdl-card__title {
+        max-height: 150px;
+        display: block;
+        
+        @media (max-width: $xitomatl-card-width-details) {
+            
+            .mdl-card__title-text {
+                width: calc(100% - 60px);
+            }
+        }
+    }
+
+    
+    
+    .mdl-list.tasks{
+        max-height: 100%;
+    }
+
+    
+    .task-card-actions {
+        
+        button {
+            float: right;
+            margin-top: 8px;
+            margin-bottom: 8px;
+            width: 125px;
+            text-transform: capitalize;
+            
+            .material-icons {
+                display: inline;
+            }
+        }
+    }
+    
+    @media (max-width: 479px) {
+        
+        .task-card-actions {
+            
+            display: flex;
+            
+            button {
+                width: 42px;
+                margin: 5px;
+            }
+        }
+        
+        .action-icon-text {
+            display: none;
+        }
+    }
+}
+
+
+.xitomatl-card.emptyTaskCard {
+    
+    width: 250px;
+    height: 175px;
+    min-height: 175px;
+        
+    .addButton {
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 15px;
+        margin-bottom: 15px;
+        width: 95px;
+        height: 95px;
+        
+        i {
+            font-size: 41px;
+            width: 41px;
+            height: 41px;
+            line-height: 41px;
+            transform: translate(-21px, -21px);
+        }
+    }
+}
+
+.xitomatl-card.mdl-card.empty-card {
+    
+    width: $xitomatl-card-width;
+    min-height: 300px;
+    
+    .mdl-card__title {
+        max-height: 150px;
+        display: block;
+        
+        @media (max-width: $xitomatl-card-width) {
+            
+            .mdl-card__title-text {
+                width: calc(100% - 60px);
+            }
+        }
+    }
+
+    
+    
+    .mdl-list.tasks{
+        max-height: 100%;
+    }
+
+    
+    .task-card-actions {
+        
+        button {
+            float: right;
+            margin-top: 8px;
+            margin-bottom: 8px;
+            width: 125px;
+            text-transform: capitalize;
+            
+            .material-icons {
+                display: inline;
+            }
+        }
+    }
+    
+    @media (max-width: 479px) {
+        
+        .task-card-actions {
+            
+            display: flex;
+            
+            button {
+                width: 42px;
+                margin: 5px;
+            }
+        }
+        
+        .action-icon-text {
+            display: none;
+        }
+    }
+}
+
+/* End of Task Cards */
+
+
+
+
+
+
+
+
+
+
+
+/* Single Tasks */
+.xitomatl-task {
+    
+    $xitomatl-task-width: 600px;
+    margin: auto;
+    width: $xitomatl-task-width;
+    
+    .mdl-card {
+      min-height: 300px;
+      width: $xitomatl-task-width;
+      
+      .mdl-grid {
+          
+          form {
+              color: $content-color;
+              font-size: 1rem;
+              overflow: hidden;
+              padding: 0px;
+          }
+      }
+    }
+    
+    @media (max-width: $xitomatl-task-width) {
+        width: 100%;
+        
+        .mdl-card {
+            width: 100%;
+        }
+    }
+    
+
+    .mdl-card__title {
+        color: $primary-card-title-color;
+        background-color: $primary-card-title-background-color;
+    }
+    
+    .cardActions {
+        
+        button {
+            float: right;
+            margin-top: 8px;
+            margin-bottom: 8px;
+            width: 125px;
+            text-transform: capitalize;
+            
+            .material-icons {
+                display: inline;
+            }
+        }
+    }
+    
+    @media (max-width: 479px) {
+        
+        .cardActions{
+            
+            display: flex;
+            
+            button {
+                width: 42px;
+                margin: 5px;
+            }
+        }
+        
+        .action-icon-text {
+            display: none;
+        }
+    }
+    
+    
+    
+    .taskPriority {
+        position: relative;
+        font-size: 16px;
+        box-sizing: border-box;
+        width: 300px;
+        margin: 0;
+        padding: 20px, 0px;
+        
+        
+        label {
+            color: rgb(96,125,139);
+            font-size: 12px;
+            top: 4px;
+            visibility: visible;
+        }
+    }
+    
+    .task-time {
+        display: flex;
+    }
+}
+
+/* End of Single Tasks */
+
+
+
+
+
+/* Start of timer */
+.timerContent {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+}
+
+.timers {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    
+    
+    .workingTimer {
+        p {
+            font-size: 34px;
+            line-height: 40px;
+            font-weight: 400;
+            color: $content-color;
+            margin: auto;
+            text-align: center;
+        }
+        
+        .timerDescription {
+            font-size: 12px;
+            line-height: 12px;
+            font-weight: 400;
+            color: $content-color-soft;
+        }
+    }
+    
+    
+    .taskTimer {
+        p {
+            font-size: 16px;
+            line-height: 22px;
+            font-weight: 400;
+            color: $content-color-soft;
+            margin: auto;
+            text-align: center;
+        }
+        
+        .timerDescription {
+            font-size: 12px;
+            line-height: 12px;
+            font-weight: 400;
+            color: $content-color-soft
+        }
+    }
+}
+
+.timerActions {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    
+    button {
+        margin: 10px;
+    }
+}
+
+
+
+
+
+/* End of Timer */

@@ -1,1 +1,102 @@
+<div class="mdl-card__title">
+    <div class="mdl-card__menu left">
+        {{#link-to "task-cards.detail" task.taskCard.id}}<button class="mdl-button mdl-js-button mdl-button--icon"><i class="material-icons md-36">chevron_left</i></button>{{/link-to}}
+    </div>
+    {{textarea class="mdl-textfield__input mdl-card__title-text left" type="text" value=task.title enter="updateTaskTitle" focus-out="updateTaskTitle"}}
+</div>
+
+<!-- Grid consists of main edition area and actions on the right -->
+<div class="mdl-grid">
+    <div class="mdl-cell mdl-cell--10-col mdl-cell--6-col-tablet mdl-cell--4-col-phone">
+        <form class="summaryForm" {{action "taskFormSubmit"}}>
+            <div class="labeledData">
+                <label for="{{concat "taskCard-" task.taskCard.id}}">Lista</label>
+                <p id={{concat "taskCard-" task.taskCard.id}} class="labeledContent">
+                    {{task.taskCard.title}}
+                </p>
+            </div>
+            
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label description">
+                <label class="mdl-textfield__label" for={{concat "taskDescription-" task.id}}>Descripción de la tarea</label>
+                {{textarea class="mdl-textfield__input" type="text" id=(concat "taskDescription-" task.id) value=task.description focus-out="updateTaskDescription" enter="updateTaskDescription"}}
+            </div>
+            
+            <div class="task-time task-card-summary">
+                <div class="summary_block_bg">
+                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" {{action "focusHelper" (concat "taskDuration-" task.id)}}>
+                        <label class="mdl-textfield__label" for={{concat "taskDuration-" task.id}}>Duración</label>
+                        {{input class="mdl-textfield__input summary_input" type="number" id=(concat "taskDuration-" task.id) value=task.unitDuration enter="updateTaskDuration" focus-out="updateTaskDuration"}}
+                    </div>
+                    
+                    <button id={{concat "timeUnit-" task.id}} class="mdl-button mdl-js-button mdl-js-ripple-effect optionButton">{{pluralize-word task.unitDuration task.friendlyTimeUnit omitCount=true}}<i class="material-icons">mode_edit</i></button>
+                    <ul class="mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" data-mdl-for="{{concat "timeUnit-" task.id}}">
+                        {{!-- TODO: Change this to use a catalog  --}}
+                        <li class="mdl-menu__item" {{action "selectTimeUnit" "day"}}>Dias</li>
+                        <li class="mdl-menu__item" {{action "selectTimeUnit" "hour"}}>Horas</li>
+                        <li class="mdl-menu__item" {{action "selectTimeUnit" "minute"}}>Minutos</li>
+                    </ul>
+                </div>
+                
+                <div class="labeledData summary_block_md">
+                    <p><label for={{concat "taskTimeSpent-" task.id}}>Tiempo invertido</label></p>
+                    <p id={{concat "taskTimeSpent-" task.id}}>{{task.unitTimeSpent}} {{pluralize-word task.unitTimeSpent task.friendlyTimeUnit omitCount=true}}</p>
+                </div>
+                
+                <div class="labeledData summary_block_md">
+                    <p><label for={{concat "taskProgress-" task.id}}>Progreso</label></p>
+                    <p id={{concat "taskProgress-" task.id}}>
+                        <span class={{ task.progressClass }}>
+                            {{if task.completedDate "100%" (concat task.progress "%")}}
+                        </span>
+                        {{#unless task.completedDate }}
+                            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--accent mdl-button-md assignmentButton" {{action "toggleCompleteTask" }}><i class="material-icons">assignment_turned_in</i></button>
+                        {{ else}}
+                            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--accent mdl-button-md assignmentButton" {{action "toggleCompleteTask" }}><i class="material-icons">assignment_return</i></button>
+                        {{/unless}}
+                    </p>
+                </div>
+            </div>
+
+            <div class="taskPriority task-card-summary">
+                <div class="summary_block_md">
+                    <div><label for={{concat "taskPriority-" task.id}}>Prioridad</label></div>
+                    <button id={{concat "taskPriority-" task.id}} class="mdl-button mdl-js-button mdl-js-ripple-effect optionButton">{{task.priority}}<i class="material-icons">mode_edit</i></button>
+                    <ul class="mdl-menu mdl-menu--top-left mdl-js-menu mdl-js-ripple-effect" data-mdl-for="{{concat "taskPriority-" task.id}}">
+                        {{!-- Priorities go from highest to lowest --}}
+                        {{!-- TODO: Change this to use a catalog  --}}
+                        <li class="mdl-menu__item" {{action "selectPriority" "Alta"}}>Alta</li>
+                        <li class="mdl-menu__item" {{action "selectPriority" "Media"}}>Media</li>
+                        <li class="mdl-menu__item" {{action "selectPriority" "Baja"}}>Baja</li>
+                        <li class="mdl-menu__item" {{action "selectPriority" "Ninguna"}}>Ninguna</li>
+                    </ul>
+                </div>
+                <div class="summary_block_md">
+                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" {{action "focusHelper" (concat "taskDueDate-" task.id)}}>
+                        <label class="mdl-textfield__label" for={{concat "taskDueDate-" task.id}}>Fecha límite</label>
+                        {{input class="mdl-textfield__input summary_input" type="text" enter="updateTaskDueDate" focus-out="updateTaskDueDate"
+                        pattern="(0[1-9]|1[0-9]|2[0-9]|3[01]).(0[1-9]|1[012]).[0-9]{4}" id=(concat "taskDueDate-" task.id) value=task.friendlyDueDate placeholder="DD/MM/YYYY"}}
+                        <span class="mdl-textfield__error">DD/MM/YYYY</span>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    
+    <!-- Actions -->
+    <div class="mdl-cell mdl-cell--2-col mdl-cell--1-col-phone cardActions">
+        {{!-- {{#unless task.completedDate }}
+            <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" {{action "toggleCompleteTask" }}><i class="material-icons">assignment_turned_in</i><span class="action-icon-text">Completo</span></button>
+        {{ else}}
+            <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" {{action "toggleCompleteTask" }}><i class="material-icons">assignment_return</i><span class="action-icon-text">Incompleto</span></button>
+        {{/unless}} --}}
+        <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent"><i class="material-icons">account_circle</i><span class="action-icon-text"> Miembros</span></button>
+        <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent"><i class="material-icons">attachment</i><span class="action-icon-text"> Archivos</span></button>
+        <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent"><i class="material-icons">label</i><span class="action-icon-text"> Etiquetas</span></button>
+        <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" {{action "deleteTask" }}><i class="material-icons">delete</i><span class="action-icon-text"> Borrar</span></button>
+    </div>
+</div>
+<div>
+    {{ xitomatl-task-timer task=task updateTask=updateTask timer=timer}}
+</div>
+
 {{yield}}

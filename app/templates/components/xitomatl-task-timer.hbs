@@ -1,0 +1,43 @@
+<div class="timerContent">
+    {{!--  This is only shown the first time to save screen real state. Check what is better usability-wise --}}
+    {{#if isWorkingInTask }}
+        <div class="timers">
+            <div class="workingTimer">
+                <p class="timerDescription">Tiempo de trabajo</p>
+                <p>{{if countDownRemainingTime.days (concat countDownRemainingTime.days " dias") ""}} {{countDownRemainingTime.hours}}:{{countDownRemainingTime.minutes}}:{{countDownRemainingTime.seconds}}</p>
+            </div>
+            {{#unless task.completed }}
+                <div class="taskTimer">
+                    <p class="timerDescription">Tiempo restante de la tarea</p>
+                    <p>{{if remainingTaskTime.days (concat remainingTaskTime.days " dias") ""}} {{remainingTaskTime.hours}}:{{remainingTaskTime.minutes}}:{{remainingTaskTime.seconds}}</p>
+                </div>
+            {{/unless}}
+        </div>
+    {{/if}}
+        
+        <div class="timerActions">
+                {{!-- Show the reset button only if the counter has been used --}}
+                {{#if showResetButton }}
+                    <button id={{concat "taskResetTimer-" task.id}} {{action "resetTimerAction"}} class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button-md mdl-button--fab mdl-button--colored"><i class="material-icons">restore</i></button>
+                {{/if}}
+                {{!--  Show play or pause depending on the scenario --}}
+                {{#unless isCountingDown }}
+                    {{#if isWorkingInTask }}
+                        <button id={{concat "taskStartTimer-" task.id}} {{action "startTimerAction" }} class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button-md mdl-button--fab mdl-button--colored"><i class="material-icons">play_arrow</i></button>
+                    {{ else }}
+                        <button id={{concat "taskStartTimer-" task.id}} {{action "startTimerAction" }} class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button-md mdl-button--fab mdl-button--colored"><i class="material-icons">timer</i></button>
+                    {{/if}}
+                {{ else }}
+                    <button id={{concat "taskPauseTimer-" task.id}} {{action "pauseTimerAction" }} class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button-md mdl-button--fab mdl-button--colored"><i class="material-icons">pause</i></button>
+                {{/unless}}
+                
+
+                <button id={{concat "taskBreak-" task.id}} class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button-md mdl-button--fab mdl-button--colored"><i class="material-icons">free_breakfast</i></button>
+                <ul class="mdl-menu mdl-menu--top-left mdl-js-menu mdl-js-ripple-effect" data-mdl-for="{{concat "taskBreak-" task.id}}">
+                    <li class="mdl-menu__item" {{action "selectTimerAction" "SHORT_BREAK"}}>Descanso corto</li>
+                    <li class="mdl-menu__item" {{action "selectTimerAction" "LONG_BREAK"}}>Descanso largo</li>
+                    <li class="mdl-menu__item" {{action "selectTimerAction" "WORK_TASK"}}>Trabajar en la tarea</li>
+                </ul>
+        </div>
+</div>
+{{yield}}
