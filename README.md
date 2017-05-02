@@ -1,7 +1,21 @@
 # xitomatl
 
-This README outlines the details of collaborating on this Ember application.
-A short introduction of this app could easily go here.
+Xitomatl is the codename for my personal productivity tool.
+Main features include:
+
+1) Boards to organize your tasks. (In a similar fashion to Trello)
+2) Priorization, deadlines and scheduling for every task.
+3) Time tracking for every tasks using the Pomodoro technique (https://en.wikipedia.org/wiki/Pomodoro_Technique)
+4) Daily planning (Get the pending items for the day)
+5) Task labeling. (Useful to know in what type of tasks you spend your time on)
+6) Historic data. See what you worked on in a given time frame
+7) Dashboards. See what type of tasks you have used your time on
+
+Future plans:
+
+1) Integration with chatbots to let you know your agenda for the day and week.
+2) Adding, tracking and organizing tasks through the chatbot
+3) Get your daily agenda using the chatbot
 
 ## Prerequisites
 
@@ -19,6 +33,23 @@ You will need the following things properly installed on your computer.
 * `cd xitomatl`
 * `npm install`
 * `bower install`
+
+## Firebase
+
+Set the firebase configuration in config/environment.js
+
+Under the ENV object add:
+
+firebase: {
+    apiKey: '<YOUR API KEY>',
+    authDomain: '<YOUR AUTH DOMAIN>',
+    databaseURL: '<YOUR DATABASE URL>',
+    storageBucket: '<YOR STORAGE BUCKET>',
+    messagingSenderId: '<YOUR MESSAGING SENDER ID>'
+}
+
+These settings can be found in the firebase console for your application: https://console.firebase.google.com/
+
 
 ## Running / Development
 
