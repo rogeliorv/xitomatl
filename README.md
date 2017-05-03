@@ -45,11 +45,11 @@ Set the firebase configuration in config/environment.js
 Under the ENV object add:
 
 firebase: {
-    apiKey: '<YOUR API KEY>',
-    authDomain: '<YOUR AUTH DOMAIN>',
-    databaseURL: '<YOUR DATABASE URL>',
-    storageBucket: '<YOR STORAGE BUCKET>',
-    messagingSenderId: '<YOUR MESSAGING SENDER ID>'
+    apiKey: '(YOUR API KEY)',
+    authDomain: '(YOUR AUTH DOMAIN)',
+    databaseURL: '(YOUR DATABASE URL)',
+    storageBucket: '(YOR STORAGE BUCKET)',
+    messagingSenderId: '(YOUR MESSAGING SENDER ID)'
 }
 
 These settings can be found in the firebase console for your application: https://console.firebase.google.com/
@@ -78,6 +78,6 @@ Make use of the many generators for code, try `ember help generate` for more det
 
 Setup your firebase cli and login to your project. (https://firebase.google.com/docs/cli/)
 
-Run the firebase deploy command: 
+Run the firebase deploy command:
 
 firebase deploy --only hosting

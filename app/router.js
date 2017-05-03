@@ -12,6 +12,8 @@ Router.map(function() {
   });
 
   this.route('task', { path: '/tasks/:task_id', queryParams: 'timer'});
+  this.route('login');
+  this.route('logout');
 });
 
 export default Router;

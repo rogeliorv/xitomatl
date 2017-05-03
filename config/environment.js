@@ -7,15 +7,35 @@ module.exports = function(environment) {
     rootURL: '/',
     locationType: 'auto',
     EmberENV: {
-      FEATURES: {
+        FEATURES: {
         // Here you can enable experimental features on an ember canary build
         // e.g. 'with-controller': true
-      },
-      EXTEND_PROTOTYPES: {
-        // Prevent Ember Data from overriding Date.parse.
-        Date: false
-      }
+        },
+        EXTEND_PROTOTYPES: {
+            // Prevent Ember Data from overriding Date.parse.
+            Date: false
+        }
     },
+    
+    firebase: {
+        apiKey: 'AIzaSyBUyvaBZIgtmcJSItDgalXimSZ9cUVtzJ0',
+        authDomain: 'rambutan-f0b55.firebaseapp.com',
+        databaseURL: 'https://rambutan-f0b55.firebaseio.com',
+        storageBucket: 'rambutan-f0b55.appspot.com',
+        messagingSenderId: '75924350978'
+    },
+    
+    torii: {
+        sessionServiceName: 'session'
+    },
+    
+    // if using ember-cli-content-security-policy
+    // contentSecurityPolicy: {
+    //     'script-src': "'self' 'unsafe-eval' apis.google.com",
+    //     'frame-src': "'self' https://*.firebaseapp.com",
+    //     'connect-src': "'self' wss://*.firebaseio.com https://*.googleapis.com"
+    // },
+
 
     APP: {
       // Here you can pass flags/options to your application instance
@@ -23,7 +43,8 @@ module.exports = function(environment) {
     }
   };
 
-  if (environment === 'development') {
+  if(environment === 'development') {
+    ENV.APP.API_HOST = 'http://localhost:4200';
     // ENV.APP.LOG_RESOLVER = true;
     // ENV.APP.LOG_ACTIVE_GENERATION = true;
     // ENV.APP.LOG_TRANSITIONS = true;
@@ -43,6 +64,8 @@ module.exports = function(environment) {
   }
 
   if (environment === 'production') {
+      ENV.APP.API_HOST = 'https://api.myproject.com';
+      ENV.APP.API_NAMESPACE = 'v2';
 
   }
 

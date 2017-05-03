@@ -1,0 +1,6 @@
+{{#if session.isAuthenticated}}
+  Logged in as {{session.currentUser.email}}
+{{else}}
+    {{firebase-ui-auth signInSuccess=(route-action 'signInSuccess')}}
+{{/if}}
+{{outlet}}

@@ -11,6 +11,24 @@ $xitomatl-card-width-details: 600px;
 $content-color: rgba(0, 0, 0, 0.7);
 $content-color-soft: rgba(0, 0, 0, 0.54);
 
+// .mdl-button--accent.mdl-button--accent{color:#ff4081}
+// .mdl-button--accent.mdl-button--accent.mdl-button--fab,.mdl-button--accent.mdl-button--accent.mdl-button--raised{color:#fff;background-color:#ff4081}
+// .mdl-button--fab.mdl-button--colored{background:#ff4081;color:#fff}
+// .mdl-button--fab.mdl-button--colored:hover{background-color:#ff4081}
+// .mdl-button--fab.mdl-button--colored:focus:not(:active){background-color:#ff4081}
+// .mdl-button--fab.mdl-button--colored:active{background-color:#ff4081}
+
+.mdl-button--accent.mdl-button--accent{color:rgb(83,109,254)}
+.mdl-button--accent.mdl-button--accent.mdl-button--fab,.mdl-button--accent.mdl-button--accent.mdl-button--raised{background-color:rgb(83,109,254)}
+.mdl-button--fab.mdl-button--colored{background:rgb(83,109,254);}
+.mdl-button--fab.mdl-button--colored:hover{background-color:rgb(83,109,254)}
+.mdl-button--fab.mdl-button--colored:focus:not(:active){background-color:rgb(83,109,254)}
+.mdl-button--fab.mdl-button--colored:active{background-color:rgb(83,109,254)}
+
+
+
+// .mdl-button--accent.mdl-button--accent: rgb(83,109,254);
+
 
 .material-icons.md-16 { font-size: 16px; }
 .material-icons.md-18 { font-size: 18px; }
@@ -397,6 +415,7 @@ $content-color-soft: rgba(0, 0, 0, 0.54);
             a {
                 text-decoration: none;
                 color: rgba(0,0,0,.87);
+                font-weight: 400;
             }
         }
         
@@ -404,6 +423,10 @@ $content-color-soft: rgba(0, 0, 0, 0.54);
             
             max-width: calc(100% - 100px);
             padding-top: 10px;
+            
+            a {
+                font-weight: 400;
+            }
         }
     }
 }
@@ -555,14 +578,6 @@ $content-color-soft: rgba(0, 0, 0, 0.54);
 }
 
 /* End of Task Cards */
-
-
-
-
-
-
-
-
 
 
 

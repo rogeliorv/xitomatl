@@ -1,0 +1,5 @@
+{{!-- TODO: Add a cute logging out screen --}}
+{{outlet}}
+{{#if session.isAuthenticated}}
+  Logging out {{session.currentUser.email}}
+{{/if}}
