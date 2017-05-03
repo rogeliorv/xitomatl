@@ -7,13 +7,15 @@ const Router = Ember.Router.extend({
 });
 
 Router.map(function() {
-  this.route('task-cards', function() {
-      this.route('detail', {path: '/:task_card_id'});
-  });
+    
+    this.route('index', { path: '/' });
+    this.route('task-cards', function() {
+        this.route('detail', {path: '/:task_card_id'});
+    });
 
-  this.route('task', { path: '/tasks/:task_id', queryParams: 'timer'});
-  this.route('login');
-  this.route('logout');
+    this.route('task', { path: '/tasks/:task_id', queryParams: 'timer'});
+    this.route('login');
+    this.route('logout');
 });
 
 export default Router;
