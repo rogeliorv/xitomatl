@@ -1,3 +1,4 @@
+$header-background-color: rgb(96,125,189);
 $primary-card-title-color: #FFF;
 $primary-card-title-background-color: rgb(83,109,254);
 $input-background-color: $primary-card-title-background-color;
@@ -36,6 +37,10 @@ $content-color-soft: rgba(0, 0, 0, 0.54);
 .material-icons.md-36 { font-size: 36px; }
 .material-icons.md-48 { font-size: 48px; }
 
+
+header.mdl-layout__header {
+    background-color: $header-background-color;
+}
 
 .red { color: $red; }
 .orange { color: $orange; }
